@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Alert, Badge, ListGroup, ListGroupItem} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Alert, Spinner, Badge, ListGroup, ListGroupItem} from "react-bootstrap";
 import Pagination from "../Pagination";
 
-const Issue = ({data, error}) => {
-    const [item, setItem] = useState(data)
+const Issue = ({data, error, loading}) => {
+
     const [active, setActive] = useState(1)
     const [perPage, setPerPage] = useState(5)
 
@@ -14,12 +14,24 @@ const Issue = ({data, error}) => {
         setActive(number)
     }
 
+
+
     if (error){
         return (
             <div className="m-6">
                 <Alert style={{"textAlign":"center"}} variant="danger">
                     <Alert.Heading>Not Found</Alert.Heading>
                 </Alert>
+            </div>
+        )
+    }
+
+    if (loading){
+        return (
+            <div style={{"margin": "100px auto", "textAlign" : "center"}}>
+                <Spinner style={{"padding": "50px"}} variant="info" animation="grow" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
             </div>
         )
     }

@@ -1,7 +1,5 @@
 import React from 'react';
 import {Button, Form, FormControl, Navbar} from "react-bootstrap";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Nav from "react-bootstrap/cjs/Nav";
 import logo from "../../githublogo.svg"
 
 const Header = ({repo, owner, setOwner, setRepo, clickHandle}) => {

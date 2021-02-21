@@ -5,13 +5,15 @@ import React, {useEffect, useState} from "react";
 import Issue from "../Issue";
 
 function App() {
-
+    const [loading, setLoading] = useState(false)
     const [owner, setOwner] = useState("")
     const [error, setError] = useState(false)
     const [repo, setRepo] = useState("")
     const [issue, setIssue] = useState([])
     const fetchIssue = (e)=>{
         e.preventDefault()
+        setLoading(true)
+        setError(false)
         fetch(`https://api.github.com/repos/${owner}/${repo}/issues`)
             .then((res)=>{
                 if (res.ok){
@@ -26,7 +28,9 @@ function App() {
                 // })
                 setError(false)
                 setIssue(res)
+                setLoading(false)
             }).catch(error=>{
+                setLoading(false)
             setError(true)
         })
     }
@@ -40,7 +44,7 @@ function App() {
           setRepo={setRepo}
           clickHandle={fetchIssue}
       />
-      <Issue error={error} data={issue}/>
+      <Issue loading={loading} error={error} data={issue}/>
     </div>
   );
 }
